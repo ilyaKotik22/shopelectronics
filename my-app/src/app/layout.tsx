@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/ui/header";
+import FilterMenu from "@/components/features/filterMenu/FilterMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,8 +30,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header/>
-        <div className="mt-[50px]">
-            {children}
+        <div className="px-[5vw] mt-[100px] grid grid-cols-12">
+            <aside className="col-span-12 lg:col-span-4">
+              <FilterMenu/>
+            </aside>
+            <main className="col-span-12 lg:col-span-4">
+                {children}
+            </main>
+            
         </div>
         
       </body>
