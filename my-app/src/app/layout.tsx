@@ -31,12 +31,7 @@ export default function RootLayout({
       >
         <Header/>
         <div className="px-[5vw] mt-[100px] grid grid-cols-12">
-            <aside className="col-span-12 lg:col-span-4">
-              <FilterMenu/>
-            </aside>
-            <main className="col-span-12 lg:col-span-4">
-                {children}
-            </main>
+          {children}
             
         </div>
         
