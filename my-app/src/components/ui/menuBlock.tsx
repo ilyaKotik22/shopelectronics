@@ -1,7 +1,14 @@
+
 import { products } from "@/config/menuItems";
 import CardProduct from "./cardProduct";
 
-const MenuBlock = () => {
+
+
+const MenuBlock = async () => {
+    
+    // useEffect(()=>{
+    //     console.log(searchParamsm)
+    // },[searchParamsm])
     return ( <ul className="flex gap-5 flex-wrap">
         {products.map(el=>{
             return(

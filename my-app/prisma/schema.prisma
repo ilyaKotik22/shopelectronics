@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // или mysql / sqlite,
+  
+
+}
+
+//////////////////////////////////////////////////////
+// ENUMS (опционально)
+//////////////////////////////////////////////////////
+
+enum Currency {
+  RUB
+  USD
+  EUR
+}
+
+//////////////////////////////////////////////////////
+// ОСНОВНЫЕ МОДЕЛИ
+//////////////////////////////////////////////////////
+
+model Category {
+  slug      String   @id                // smartfony-i-fototekhnika
+  value     String                       // smartphones-and-photo
+  name      String                       // Смартфоны и фото
+  products  Product[]
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  products  Product[]
+}
+
+model Product {
+  id            String   @id @default(cuid())
+  title         String
+  description   String?
+  price         Int
+  currency      Currency @default(RUB)
+  rating        Float?
+  available     Boolean  @default(true)
+
+  categorySlug  String
+  category      Category @relation(fields: [categorySlug], references: [slug])
+
+  brandId       String?
+  brand         Brand?   @relation(fields: [brandId], references: [id])
+
+  attributes    ProductAttribute[]
+
+  // 🔽 ОБРАТНЫЕ СВЯЗИ
+  laptopSpec     LaptopSpec?
+  smartphoneSpec SmartphoneSpec?
+  tvSpec         TvSpec?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([price])
+  @@index([categorySlug])
+}
+
+
+//////////////////////////////////////////////////////
+// УНИВЕРСАЛЬНЫЕ ФИЛЬТРЫ (checkbox)
+//////////////////////////////////////////////////////
+
+model ProductAttribute {
+  id        String   @id @default(cuid())
+
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  key       String   // ram, storage, screen_type, wifi_standard
+  value     String   // "8 ГБ", "AMOLED", "Wi-Fi 6"
+
+  @@index([key])
+  @@index([key, value])
+  @@index([productId])
+}
+
+//////////////////////////////////////////////////////
+// (ОПЦИОНАЛЬНО) СПЕЦИФИКАЦИИ ПОД КАТЕГОРИИ
+// можно добавлять позже без ломки фильтров
+//////////////////////////////////////////////////////
+
+model LaptopSpec {
+  productId  String  @id
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  cpu        String
+  ramGb      Int
+  storageGb Int
+  gpu        String?
+}
+
+model SmartphoneSpec {
+  productId   String  @id
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  screenInch  Float?
+  batteryMah  Int?
+  cameraMp    Int?
+  refreshHz   Int?
+  waterproof  String?
+}
+
+model TvSpec {
+  productId   String  @id
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  screenInch  Float
+  resolution  String
+  panelType   String
+  refreshHz   Int?
+  smartTv     Boolean
+}

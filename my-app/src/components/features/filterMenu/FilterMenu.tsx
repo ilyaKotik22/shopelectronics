@@ -2,93 +2,147 @@
 import { Checkbox } from "@/components/ui/checkbox"
 import MyInput from "@/components/ui/MyInput";
 import { filtersByCategory } from "@/config/filterMenu";
-import { Filter } from "@/types/filter";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams} from "next/navigation";
 import { useEffect, useState } from "react";
 
-type FilterValue = string | string[] | undefined;
 
-type FilterState = Record<string, FilterValue>;
 const FilterMenu = () => {
-    
-    const params: {catalog: string, item: string} = useParams()
-    const [rangeMin,setRangeMin] = useState<string>('')
-    const [rangeMax,setRangeMax] = useState<string>('')
-    const [error,setError] = useState<string>('')
-    console.log(params)
-    const [filterMas, setFilterMas] = useState<FilterState>({})
-    const handleCheckBox = (catalog:{name: string},item:string) => {
+    const router = useRouter()
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const params = useParams<{catalog:string, item:string}>()
 
-        if (catalog.name in filterMas ){
-            let repit = 0
-            let newCatalog:string[] =  filterMas[catalog.name] || []
-            for (const i in newCatalog as []){
-               
-                if (newCatalog[i] === item) repit++
-            }
-            if (repit > 0){
-                newCatalog = newCatalog.filter((el)=> el !== item)
-            } else{
-                 console.log('pushed')
-                newCatalog.push(item)
-            }
-            
-            const newFilterMas = {...filterMas, [catalog.name]: newCatalog}
-            setFilterMas(newFilterMas)
-        }else{
-            console.log('pushed1')
-            const newFilterMas = {...filterMas, [catalog.name]: [item]}
-            setFilterMas(newFilterMas)
+    const [rangeMin,setRangeMin] = useState('')
+    const [rangeMax,setRangeMax] = useState('')
+    const [error,setError] = useState('')
+
+    const updateQueryParam = (key:string, value: string | null) => {
+        const params = new URLSearchParams(searchParams.toString())
+
+        if (value === null || value === '') {
+            params.delete(key)
+        } else {
+            params.set(key, value)
         }
-        
-        
+        router.push(`${pathname}?${params.toString()}`)
     }
-   
+
+    const toggleCheckboxParam = (val,key: string, value: string) => {
+        const params = new URLSearchParams(searchParams.toString())
+        const current = params.getAll(key)
+        const currantValue = val+ '.' + value
+        if (current.includes(currantValue)) {
+            params.delete(key)
+            current.filter(v => v !== currantValue).forEach(v => params.append(key,v))
+        } else {
+            params.append(key, currantValue)
+        }
+
+        router.push(`${pathname}?${params.toString()}`)
+    }
+
     useEffect(() => {
-        console.log(filterMas)
-    },[filterMas])
-   
-
-
-
+        setRangeMax('')
+        setRangeMin('')
+       
+    }, [params.catalog])
+  
     return ( 
     <section className="">
-        <ul className="text-white">
-            {filtersByCategory[params.catalog].map(ell=>{
-                return (
+        <ul className="text-white"> 
+            {filtersByCategory[params.catalog]?.defaultFilter.map(ell => (
                 <li className="pb-5" key={ell.id}>
                     <span className="pb-2">{ell.name}</span>
-                   
+
                     <div className="">
-                       {ell.type === 'checkbox' && <ul>{ell.choices.map(el=><li key={el as string} ><Checkbox className="mr-2" onCheckedChange={()=>handleCheckBox(ell,el)}/>{el as string}</li>)}</ul>}
-                       {ell.type === 'range' && 
-                       <div>
-                        <div className="">от 
-                            <MyInput
-                            label="Имя"
-                            value={rangeMin }
-                            onChange={setRangeMin}
-                            error={error}
-                            placeholder="цена"
-                            className="w-20 px-1 py-0 h-3 ml-2"
-                        />
-                        </div>
-                        <div className="">до
-                             <MyInput
-                            label="Имя"
-                            value={rangeMax }
-                            onChange={setRangeMax}
-                            error={error}
-                            placeholder="цена"
-                            className="w-20 px-1 py-0 h-3 ml-2"
-                        />
-                        </div>
-                        </div>}
+                        
+                        {ell.type === 'checkbox' && (
+                            <ul>
+                                {ell.choices.map(choice => {
+                                    const isChecked = searchParams.getAll(ell.id).includes('defaultFilter' + '.' +choice)
+                                 
+                                    return (
+                                        <li key={choice}>
+                                            <Checkbox
+                                                className="mr-2"
+                                                checked={isChecked}
+                                                onCheckedChange={(checked) => {
+                                                    toggleCheckboxParam('defaultFilter',ell.id, choice)
+                                                }}
+                                            />
+                                            {choice}
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        )}
+
+                        
                     </div>
-                </li>)
-            })}
+                </li>
+            ))}
+            {filtersByCategory[params.catalog]?.filters.map(ell => (
+                <li className="pb-5" key={ell.id}>
+                    <span className="pb-2">{ell.name}</span>
+
+                    <div className="">
+                        
+                        {ell.type === 'checkbox' && (
+                            <ul>
+                                {ell.choices.map(choice => {
+                                    const isChecked = searchParams.getAll(ell.id).includes(filtersByCategory[params.catalog].value + '.' +choice)
+                                    
+                                    return (
+                                        <li key={choice}>
+                                            <Checkbox
+                                                className="mr-2"
+                                                checked={isChecked}
+                                                onCheckedChange={(checked) => {
+                                                    toggleCheckboxParam(filtersByCategory[params.catalog].value,ell.id, choice)
+                                                }}
+                                            />
+                                            {choice}
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        )}
+
+                        {ell.type === 'range' && (
+                            <div>
+                                <div className=""> от
+                                    <MyInput
+                                        label="Имя"
+                                        value={rangeMin}
+                                        onChange={(val) => {
+                                            setRangeMin(val)
+                                            updateQueryParam('min', val)
+                                        }}
+                                        error={error}
+                                        placeholder="цена"
+                                        className="w-20 px-1 py-0 h-3 ml-2"
+                                    />
+
+                                </div>
+                                    <div className="">до
+                                        <MyInput
+                                        label="Имя"
+                                        value={rangeMax}
+                                        onChange={(val) => {
+                                            setRangeMax(val)
+                                            updateQueryParam('max', val)
+                                        }}
+                                        error={error}
+                                        placeholder="цена"
+                                        className="w-20 px-1 py-0 h-3 ml-2"
+                                        />
+                                    </div>
+                            </div>
+                        )}
+                    </div>
+                </li>
+            ))}
         </ul>
-      
     </section> 
 
     );
