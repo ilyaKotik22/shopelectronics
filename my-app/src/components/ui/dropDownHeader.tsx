@@ -24,28 +24,14 @@ const DropDownHeader: React.FC<DropDownHeaderType> = ({vis,menuRef}) => {
            {categoris.map(el=>{
             return(
                 <li className="px-4 py-1 hover:bg-white hover:text-gray-950 duration-300 border-2 border-neutral-900 rounded-md cursor-pointer " 
-                onClick={()=>{
-                    setUnderMenu(el)
-                    setCatalog(el.url)
-                    }} key={el.name}>
+                onClick={()=> router.push(`/catalog/`+el.url )} key={el.name}>
                     
                     {el.name}
                 </li>
             )
            })} 
         </ul>
-        {
-            underMenu ? <ul className={'mt-[90px] bg-neutral-900 h-max min-w-[320px] max-w-[320px] w-max px-2 py-4 border-2 border-neutral-900 rounded-md cursor-pointer'}>
-           {underMenu && underMenu.underItems.map(el=>{
-            return(
-                <li onClick={()=>router.push(`/catalog/${catalog}/`+el.url)} className="px-4 py-1 hover:bg-white hover:text-gray-950 duration-300 border-2 border-neutral-900 rounded-md cursor-pointers cursor-pointer" key={el.name}>
-                    {el.name}
-                    
-                </li>
-            )
-           })}
-        </ul> : <></>
-        }
+       
         
     </section> 
     );
