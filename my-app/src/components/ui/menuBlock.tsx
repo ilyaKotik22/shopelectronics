@@ -4,20 +4,20 @@ import CardProduct from "./cardProduct";
 
 
 
-const MenuBlock = async () => {
-    
+const MenuBlock = async ({items}) => {
+ 
     // useEffect(()=>{
     //     console.log(searchParamsm)
     // },[searchParamsm])
     return ( <ul className="flex gap-5 flex-wrap">
-        {products.map(el=>{
+        {items.map(el=>{
             return(
                 <li key={el.id}>
                     <CardProduct
-                    name={el.name}
+                    name={el.title}
                     price={el.price}
                     id={el.id}
-                    brand={el.brand}
+                    brand={el.brand && el.brand.name}
                     />
                 </li>
                 
