@@ -1,11 +1,11 @@
 import FilterMenu from "@/components/features/filterMenu/FilterMenu";
 import { prisma } from '@/lib/prisma'
 import MenuBlock from "@/components/ui/menuBlock";
-import { headers } from "next/headers";
 import { createApi } from "@/lib/createApi";
+import { BaseItem } from "@/types/item";
 
 const Page = async ({params, searchParams}: {
-  
+    params:{catalog: string},
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
     }) => {
   
@@ -13,7 +13,7 @@ const Page = async ({params, searchParams}: {
     const paramsUrl =  await params
 
       
-    const products = await prisma.product.findMany(createApi(paramsUrl,SearchParams))
+    const products: BaseItem[] = await prisma.product.findMany(createApi(paramsUrl,SearchParams)) as unknown as BaseItem[] || []
 
     console.log(createApi(paramsUrl,SearchParams))
     return ( 

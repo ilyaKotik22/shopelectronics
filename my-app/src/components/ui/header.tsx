@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import MyInput from "./MyInput";
 import DropDownHeader from "./dropDownHeader";
 import { useRouter } from "next/navigation";
@@ -14,25 +14,25 @@ const Header = () => {
     const buttonRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (!dropDown) return
+  if (!dropDown) return;
 
-        const handleClickOutside = (event: MouseEvent) => {
-        // Если кликнули внутри кнопки открытия — ничего не делаем
-        if (buttonRef.current?.contains(event.target as Node)) {
-            return
-        }
+  const handleClickOutside = (event: MouseEvent) => {
+    // Если кликнули внутри кнопки — ничего не делаем (меню остаётся открытым)
+    if (buttonRef.current?.contains(event.target as Node)) {
+      return;
+    }
 
-        // Если кликнули НЕ внутри меню — закрываем
-        if (!menuRef.current?.contains(event.target as Node)) {
-            setDropDown(false)
-        }
-        }
+    // Если кликнули НЕ внутри выпадающего меню — закрываем
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      setDropDown(false);
+    }
+  };
 
-        document.addEventListener("mousedown", handleClickOutside)
-        return () => {
-        document.removeEventListener("mousedown", handleClickOutside)
-        }
-    }, [dropDown])
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+    }, [dropDown]);
 
     return (
     <>
@@ -70,7 +70,7 @@ const Header = () => {
             <div className="">корзина</div>
         </section>
     </header>
-    <DropDownHeader menuRef={menuRef} vis={dropDown}/>
+    <DropDownHeader menuRef={menuRef as RefObject<HTMLDivElement>} vis={dropDown}/>
     </>
      );
 }
