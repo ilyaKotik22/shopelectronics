@@ -1,20 +1,14 @@
 import { headerConfig } from "@/config/header"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { RefObject } from "react"
 
 type DropDownHeaderType = {
     vis: true | false
-    menuRef: string
+    menuRef: RefObject<HTMLDivElement>
 }
-type DropDownItem = {
-    name: string
-    underItems: string[]
-}
-const DropDownHeader: React.FC<DropDownHeaderType> = ({vis,menuRef}) => {
+type DropDownItem = { name: string; url: string; params: string; }
 
-    const [underMenu, setUnderMenu] = useState<DropDownItem>()
-    const [catalog, setCatalog] = useState<string>('')
+const DropDownHeader: React.FC<DropDownHeaderType> = ({vis,menuRef}) => {
     const router = useRouter()
     const categoris: DropDownItem[] = headerConfig.dropDownMenu
     const viss = vis ? 'block' : 'hidden'
@@ -31,8 +25,6 @@ const DropDownHeader: React.FC<DropDownHeaderType> = ({vis,menuRef}) => {
             )
            })} 
         </ul>
-       
-        
     </section> 
     );
 }
