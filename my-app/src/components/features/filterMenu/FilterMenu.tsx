@@ -22,7 +22,7 @@ const FilterMenu = () => {
         if (value === null || value === '') {
             params.delete(key)
         } else {
-            params.set(key, value)
+            params.set(`${key}`, `defaultFilter.${value}`)
         }
         router.push(`${pathname}?${params.toString()}`)
     }
@@ -55,7 +55,37 @@ const FilterMenu = () => {
                     <span className="pb-2">{ell.name}</span>
 
                     <div className="">
-                        
+                        {ell.type === 'range' && (
+                            <div>
+                                <div className=""> от
+                                    <MyInput
+                                        label="Имя"
+                                        value={rangeMin}
+                                        onChange={(val) => {
+                                            setRangeMin(val)
+                                            updateQueryParam('min', val)
+                                        }}
+                                        error={error}
+                                        placeholder="цена"
+                                        className="w-20 px-1 py-0 h-3 ml-2"
+                                    />
+
+                                </div>
+                                    <div className="">до
+                                        <MyInput
+                                        label="Имя"
+                                        value={rangeMax}
+                                        onChange={(val) => {
+                                            setRangeMax(val)
+                                            updateQueryParam('max', val)
+                                        }}
+                                        error={error}
+                                        placeholder="цена"
+                                        className="w-20 px-1 py-0 h-3 ml-2"
+                                        />
+                                    </div>
+                            </div>
+                        )}
                         {ell.type === 'checkbox' && (
                             <ul>
                                 {ell.choices.map(choice => {
@@ -108,37 +138,7 @@ const FilterMenu = () => {
                             </ul>
                         )}
 
-                        {ell.type === 'range' && (
-                            <div>
-                                <div className=""> от
-                                    <MyInput
-                                        label="Имя"
-                                        value={rangeMin}
-                                        onChange={(val) => {
-                                            setRangeMin(val)
-                                            updateQueryParam('min', val)
-                                        }}
-                                        error={error}
-                                        placeholder="цена"
-                                        className="w-20 px-1 py-0 h-3 ml-2"
-                                    />
-
-                                </div>
-                                    <div className="">до
-                                        <MyInput
-                                        label="Имя"
-                                        value={rangeMax}
-                                        onChange={(val) => {
-                                            setRangeMax(val)
-                                            updateQueryParam('max', val)
-                                        }}
-                                        error={error}
-                                        placeholder="цена"
-                                        className="w-20 px-1 py-0 h-3 ml-2"
-                                        />
-                                    </div>
-                            </div>
-                        )}
+                        
                     </div>
                 </li>
             ))}
