@@ -42,7 +42,7 @@ const FilterMenu = () => {
     }
 
     useEffect(() => {
-        setRangeMax('')
+       
         setRangeMin('')
        
     }, [params.catalog])
@@ -125,6 +125,7 @@ const FilterMenu = () => {
                                     return (
                                         <li key={choice}>
                                             <Checkbox
+                                                
                                                 className="mr-2"
                                                 checked={isChecked}
                                                 onCheckedChange={(checked) => {

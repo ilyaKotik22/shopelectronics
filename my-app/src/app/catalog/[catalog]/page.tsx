@@ -15,7 +15,6 @@ const Page = async ({params, searchParams}: {
       
     const products: BaseItem[] = await prisma.product.findMany(createApi(paramsUrl,SearchParams)) as unknown as BaseItem[] || []
 
-    console.log(createApi(paramsUrl,SearchParams))
     return ( 
     <section className="grid grid-cols-1 lg:grid-cols-[2fr_10fr] gap-6 lg:gap-10  w-[90vw]">
         <aside className="">

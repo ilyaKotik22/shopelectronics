@@ -3,11 +3,10 @@ import { RefObject, useEffect, useRef, useState } from "react";
 import MyInput from "./MyInput";
 import DropDownHeader from "./dropDownHeader";
 import { useRouter } from "next/navigation";
+import SearchBar from "../features/searchBar/SearchBar";
 
 const Header = () => {
     const router = useRouter()
-    const [searchValue,setSearchValue] = useState<string>('')
-    const [error,setError] = useState<string>('')
     const [dropDown,setDropDown] = useState<boolean>(false)
 
     const menuRef = useRef<HTMLDivElement>(null)
@@ -46,14 +45,7 @@ const Header = () => {
             <div className="w-full bg-white h-0.5 mt-2 text-gray-950">.</div>
         </section>
         <section>
-            <MyInput 
-            label="Имя"
-            value={searchValue }
-            onChange={setSearchValue}
-            error={error}
-            placeholder="Введите имя"
-            className="w-[50vw]"
-            />
+            <SearchBar/>
         </section>
         <section className="cursor-pointer">
             <div className=""><svg className="w-6 h-6 text-white m-auto dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
