@@ -4,14 +4,14 @@ import type { Prisma } from '@prisma/client'
 type QueryParams = Record<string, string | string[] | undefined>
 
 const whereBuilder = (param: string | string[]) => {
-  console.log(param)
+ 
   if (Array.isArray(param)){
           const finnalValue = param.map((el) => el.split('.')[1])
           return finnalValue
           
         }else{
           const finnalValue = param.split('.')
-          console.log(finnalValue[1])
+        
          return [finnalValue[1]]
         }}
 
@@ -26,7 +26,7 @@ export const createApi = (params: { catalog: string }, query: QueryParams) => {
     brand: true,
     category: true,
   }
-  console.log(query)
+
   Object.entries(query).forEach(([key, value]) => {
     if (!value) return
 
@@ -36,7 +36,6 @@ export const createApi = (params: { catalog: string }, query: QueryParams) => {
    
     // 1. Обработка defaultFilter → обычные поля Product
     if (prefix === 'defaultFilter') {
-      console.log('sadasdasd')
       if (key === 'brand') {
         where.brand = {
           name: { in: whereBuilder(value) }

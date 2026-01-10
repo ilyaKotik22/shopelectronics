@@ -1,32 +1,36 @@
 import { BaseItem, LaptopSpec } from "@/types/item";
+import { MyButton } from "./MyButton";
 
 
 const ItemPage = ({ item }: { item: BaseItem }) => {
     const { title, price, categorySlug, } = item
    
     return (
-        <main>
-            <section className="flex w-screen">
+        <main className="text-white mt-[5vh]">
+            <section className="flex w-[90vw] justify-between">
                 <section className="w-[35%]">
-                    dsa
+                    
                 </section>
-                <section className="w-[50vw]">
-                    <h1>{title}</h1>
-                    <h2>{price}р</h2>
-                    <h3>{categorySlug}</h3>
-    
-                        <div className="">{item.laptopSpec && 
+                <section className="w-[40vw]">
+                    <h1 className="text-[24px]">{title}</h1>
+                    <h3 className="mb-2">категория: {" " + categorySlug}</h3>
+                    <h3 className="text-[18px] mb-5">{price + " "}рублей</h3>
+                        <section className="bg-neutral-800 px-7 py-3 rounded-md">
+                            <div className="">{item.laptopSpec && 
                             Object.entries(item.laptopSpec)
                             .map(([key, value]) => (
-                            <div key={key}>
-                                {key}:{value}
+                            <div className="flex justify-between border-b-1 mb-2 border-neutral-500 " key={key}>
+                                <div className="">
+                                    {key}</div>
+                                    <div className="
+                                    ">{value}</div>
                             </div>))
                         }</div>
                     
                         <div className="">{item.smartphoneSpec && 
                             Object.entries(item.smartphoneSpec)
                             .map(([key, value]) => (
-                            <div key={key}>
+                            <div className="flex justify-between border-b-1 mb-2 border-neutral-500 " key={key}>
                                 {key}:{value}
                             </div>))
                         }</div>
@@ -34,10 +38,14 @@ const ItemPage = ({ item }: { item: BaseItem }) => {
                         <div className="">{item.tvSpec && 
                             Object.entries(item.tvSpec)
                             .map(([key, value]) => (
-                            <div key={key}>
+                            <div className="flex justify-between border-b-1 mb-2 border-neutral-500 " key={key}>
                                 {key}:{value}
                             </div>))
                         }</div>
+                        </section>
+                        <section className="mt-5">
+                            <MyButton>добавить в корзину</MyButton>
+                        </section>
                 </section>
             </section>
 
