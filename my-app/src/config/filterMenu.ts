@@ -12,7 +12,7 @@ export const filtersByCategory:FiltersByCategory = {
     filters: [
       { id: "price",          name: "Цена",                type: "range",   min: 0, max: 300000, step: 1000, currency: "₽" },
       // { id: "year",           name: "Год выпуска",         type: "checkbox", choices: ["2025", "2024", "2023", "2022 и старше"] },
-      { id: "screen_size",    name: "Диагональ экрана",    type: "checkbox", choices: ["До 6.3″", "6.5″", "6.8″ и больше"] },
+      { id: "screenInch",    name: "Диагональ экрана",    type: "checkbox", choices: ["До 6.3″", "6.5″", "6.8″ и больше"] },
       // { id: "ram",            name: "Оперативная память",  type: "checkbox", choices: ["4–6 ГБ", "8 ГБ", "12 ГБ", "16 ГБ", "18+ ГБ"] },
       // { id: "storage",        name: "Встроенная память",   type: "checkbox", choices: ["64–128 ГБ", "256 ГБ", "512 ГБ", "1 ТБ и больше"] },
       // { id: "screen_type",    name: "Тип экрана",          type: "checkbox", choices: ["AMOLED", "OLED", "IPS", "LTPO"] },

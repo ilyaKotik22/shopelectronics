@@ -119,3 +119,50 @@ model TvSpec {
   refreshHz   Int?
   smartTv     Boolean
 }
+
+
+model User {
+  id        String   @id @default(uuid())   // или Int @id @default(autoincrement())
+  login     String   @unique
+  password  String   // обязательно хешировать!
+  
+  // Другие поля, которые обычно есть
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Связь с корзиной (один-к-одному)
+  basket    Basket?  @relation("UserBasket")
+}
+
+model Basket {
+  id        String   @id @default(uuid())
+  
+  userId    String   @unique
+  user      User     @relation("UserBasket", fields: [userId], references: [id], onDelete: Cascade)
+
+  // Товары в корзине
+  items     BasketItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BasketItem {
+  id        String   @id @default(uuid())
+
+  basketId  String
+  basket    Basket   @relation(fields: [basketId], references: [id], onDelete: Cascade)
+
+  productId String   // или Int — зависит от того, как у тебя id продуктов
+  // product   Product  @relation(fields: [productId], references: [id])   ← раскомментируй, если хочешь связь
+
+  quantity  Int      @default(1)
+
+  // Можно добавить цену на момент добавления (очень рекомендуется!)
+  priceAtAdd Decimal? @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([basketId, productId])   // один и тот же товар не может быть дважды в корзине
+}

@@ -1,14 +1,19 @@
 'use client'
 import { RefObject, useEffect, useRef, useState } from "react";
-import MyInput from "./MyInput";
 import DropDownHeader from "./dropDownHeader";
 import { useRouter } from "next/navigation";
 import SearchBar from "../features/searchBar/SearchBar";
+import LogoutPopup from "../features/auth/logout";
 
-const Header = () => {
+type Header = {
+  login:string
+}
+const Header = ({login}:Header) => {
+    
+
     const router = useRouter()
     const [dropDown,setDropDown] = useState<boolean>(false)
-
+    const [logoutPopup,setLogoutPopout] = useState<boolean>(false)
     const menuRef = useRef<HTMLDivElement>(null)
     const buttonRef = useRef<HTMLDivElement>(null)
 
@@ -47,13 +52,15 @@ const Header = () => {
         <section>
             <SearchBar/>
         </section>
-        <section className="cursor-pointer">
+        {login ? <section onClick={()=> setLogoutPopout(ev=>!ev)}>{login}</section> :<section  onClick={()=> router.push('/auth')} className="cursor-pointer">
+          
             <div className=""><svg className="w-6 h-6 text-white m-auto dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
   <path  d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" />
 </svg>
 </div>
             <div className="">войти</div>
-        </section>
+        </section>}
+        
         <section className="cursor-pointer">
             <div className=""><svg className="w-6 h-6 text-white m-auto  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"/>
@@ -62,7 +69,8 @@ const Header = () => {
             <div className="">корзина</div>
         </section>
     </header>
-    <DropDownHeader menuRef={menuRef as RefObject<HTMLDivElement>} vis={dropDown}/>
+      <DropDownHeader menuRef={menuRef as RefObject<HTMLDivElement>} vis={dropDown}/>
+      <LogoutPopup ref={()=> setLogoutPopout(e=> !e)} vis={logoutPopup}/>
     </>
      );
 }
