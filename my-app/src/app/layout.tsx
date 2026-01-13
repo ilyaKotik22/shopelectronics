@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/ui/header";
 import FilterMenu from "@/components/features/filterMenu/FilterMenu";
 import { auth } from "@/auth";
+import Footer from "@/components/ui/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +34,11 @@ export default async function RootLayout({
       >
         <Header login={session?.user?.login ?? ''}/>
         <div className="px-[5vw] mt-[100px] grid grid-cols-12">
+          
           {children}
             
         </div>
-        
+        <Footer/>
       </body>
     </html>
   );

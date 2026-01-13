@@ -29,7 +29,7 @@ const LogoutPopup = ({vis,ref}:logoutPopupType) => {
             {vis &&
             <section className="fixed flex justify-center items-center  left-0 top-0  z-50 w-screen h-screen">
                 <section className="fixed flex justify-center items-center opacity-55 left-0 top-0  z-50 bg-neutral-950 w-screen h-screen"></section>
-                <section className="w-[20vw] h-[20vw] opacity-100 px-5 py-3 z-60 bg-neutral-800 text-white rounded-md">
+                <section className="w-[20vw] h-[10vw] opacity-100 px-5 py-3 z-60 bg-neutral-800 text-white rounded-md">
                     <section className="text-center text-[24px] mb-12">
                         Выйти из профиля?
                     </section>
