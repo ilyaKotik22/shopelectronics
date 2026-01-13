@@ -13,7 +13,7 @@ const DropDownHeader: React.FC<DropDownHeaderType> = ({vis,menuRef}) => {
     const categoris: DropDownItem[] = headerConfig.dropDownMenu
     const viss = vis ? 'block' : 'hidden'
     return ( 
-    <section ref={menuRef} className={'flex fixed top-0 text-white '  + viss}>
+    <section ref={menuRef} className={'flex fixed top-0 text-white z-300 '  + viss}>
         <ul className={'mt-[90px] bg-neutral-900 h-max min-w-[320px]  max-w-[320px] w-max px-2 py-4 max-w-[320px] border-2 border-neutral-900 rounded-md'}>
            {categoris.map(el=>{
             return(
