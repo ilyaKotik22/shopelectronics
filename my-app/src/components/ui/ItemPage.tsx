@@ -1,17 +1,19 @@
-import { BaseItem, LaptopSpec } from "@/types/item";
+import { BaseItem } from "@/types/item";
 import { MyButton } from "./MyButton";
+import { createApiBasket } from "@/lib/createApiBasket";
 
 
 const ItemPage = ({ item }: { item: BaseItem }) => {
-    const { title, price, categorySlug, } = item
+    const { title, price, categorySlug, id} = item
    
     return (
         <main className="text-white mt-[5vh]">
-            <section className="flex w-[90vw] justify-between">
+            <form action={createApiBasket} className="flex w-[90vw] justify-between">
                 <section className="w-[35%]">
                     
                 </section>
                 <section className="w-[40vw]">
+                    <input type="hidden" name="productId" value={id} />
                     <h1 className="text-[24px]">{title}</h1>
                     <h3 className="mb-2">категория: {" " + categorySlug}</h3>
                     <h3 className="text-[18px] mb-5">{price + " "}рублей</h3>
@@ -44,10 +46,10 @@ const ItemPage = ({ item }: { item: BaseItem }) => {
                         }</div>
                         </section>
                         <section className="mt-5">
-                            <MyButton>добавить в корзину</MyButton>
+                            <MyButton >добавить в корзину</MyButton>
                         </section>
                 </section>
-            </section>
+            </form>
 
         </main> 
         );
