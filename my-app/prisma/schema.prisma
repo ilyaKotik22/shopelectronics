@@ -49,7 +49,7 @@ model Product {
 
   brandId       String?
   brand         Brand?   @relation(fields: [brandId], references: [id])
-
+  basketItems   BasketItem[]   // ← обратная связь
   attributes    ProductAttribute[]
 
   // 🔽 ОБРАТНЫЕ СВЯЗИ
@@ -154,8 +154,8 @@ model BasketItem {
   basket    Basket   @relation(fields: [basketId], references: [id], onDelete: Cascade)
 
   productId String   // или Int — зависит от того, как у тебя id продуктов
-  // product   Product  @relation(fields: [productId], references: [id])   ← раскомментируй, если хочешь связь
-
+  product   Product  @relation(fields: [productId], references: [id]) 
+  
   quantity  Int      @default(1)
 
   // Можно добавить цену на момент добавления (очень рекомендуется!)

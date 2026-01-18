@@ -1,7 +1,10 @@
+import BasketMenu from "@/components/features/basket/BasketMenu";
+
+
 const Page = () => {
     return ( 
-    <main>
-        is BasketPage
+    <main className="w-[90vw]">
+        <BasketMenu/>
     </main> 
     );
 }
