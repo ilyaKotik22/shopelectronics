@@ -64,7 +64,7 @@ export const createApi = (params: { catalog: string }, query: QueryParams) => {
         where[specName] = {}
       }
 
-       if (key === 'ram' || key === 'ramGb' || key === 'storage' || key === 'storageGb' || key === 'refreshHz' || key === 'cameraMp' || key === 'screenInch' || key === 'screen_size') {
+       if (key === 'ram' || key === 'ramGb' || key === 'storage' || key === 'storageGb' || key === 'refreshHz' || key === 'cameraMp' || key === 'screenInch' || key === 'screen_size' || key === 'batteryMah' ) {
         const finnalValue = whereBuilder(value).map(v => Number(v.replace(/[^0-9]/g, '')))
         where[specName][key] = { in: finnalValue }
        }else{

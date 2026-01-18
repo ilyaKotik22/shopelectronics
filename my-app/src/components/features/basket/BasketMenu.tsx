@@ -13,7 +13,7 @@ const BasketMenu = async () => {
   
     },0)
     return ( 
-        <section className="grid grid-cols-12 gap-5 text-white">
+        <section className="flex flex-wrap md:grid grid-cols-12 gap-5 text-white">
       
             <ul className="block col-span-8">
                 {menuItems?.items.map((cart)=> (

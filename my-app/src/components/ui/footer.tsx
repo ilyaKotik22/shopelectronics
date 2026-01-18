@@ -27,7 +27,7 @@ const Footer = () => {
         'Обратная связь'
     ]
     return ( 
-    <footer className="px-[5vw] py-10 grid grid-cols-3 mt-[120px] bg-neutral-800 text-white text-[14px]">
+    <footer className="px-[5vw] py-10 grid grid-cols-3 mt-[120px] bg-neutral-800 text-white text-[10px] md:text-[14px]">
         <ul className="col-span-1">
             {mas1.map(el=> <li className="pb-3" key={el}>{el}</li>)}
         </ul>

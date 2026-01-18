@@ -10,16 +10,16 @@ type CartBasket = {
 
 const CartBasket = ({title,quantity,price,id}: CartBasket) => {
     return ( 
-    <li className="flex justify-between mt-4 max-w-[1400px]">
-        <section className="w-[20%] ">
+    <li className="flex justify-between mt-4 max-w-[600px]">
+        <section className="w-[35%] ">
             <p>{title}</p>
         </section>
-       <section className="w-[25%] flex justify-between">
-        <b>{quantity} шт</b> 
-        <b>{price} рублей</b>
+       <section className="w-[25%] md:w-[35%] flex justify-between">
+        <div>{quantity} шт</div> 
+        <div className="hidden md:block">{price} рублей</div>
        </section>
         <section className="w-[15%] flex justify-between max-w-[100px]">
-            <form action={createApiUpdateBasket}>
+            <form className="mr-2" action={createApiUpdateBasket}>
                 <input  type="hidden" name="ItemId" value={id} />
                 <input type="hidden" name="action" value={"+"}/>
                 <MyButton>+</MyButton>
