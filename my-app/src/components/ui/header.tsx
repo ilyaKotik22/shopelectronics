@@ -40,8 +40,8 @@ const Header = ({login}:Header) => {
 
     return (
     <>
-        <header className="fixed top-0 left-0 right-0 z-[300] w-full flex gap-5 justify-center items-center px-10 py-5 text-white bg-neutral-900">
-        <section className="cursor-pointer" onClick={()=> router.push('/')}>
+        <header className="fixed top-0 left-0 right-0 z-[300] w-[100vw] flex gap-5 sm:justify-center items-center md:justify-center  py-5 text-white bg-neutral-900 sm:px-3 ">
+        <section className="cursor-pointer hidden xl:block" onClick={()=> router.push('/')}>
             logo
         </section>
         <section onClick={()=>setDropDown(e=>!e)} className="min-w-[50px] w-[50px] h-[50px] border-2 border-white px-2 py-2 rounded-md cursor-pointer hover:bg-white duration-150">
@@ -61,7 +61,7 @@ const Header = ({login}:Header) => {
             <div className="">войти</div>
         </section>}
         
-        <section onClick={()=> login ? router.push(`/basket/${login}`) : router.push(`/auth`)} className="cursor-pointer">
+        <section onClick={()=> login ? router.push(`/basket/${login}`) : router.push(`/auth`)} className="cursor-pointer hidden xl:block">
             <div className=""><svg className="w-6 h-6 text-white m-auto  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z"/>
 </svg>
@@ -70,7 +70,7 @@ const Header = ({login}:Header) => {
         </section>
     </header>
       <section className="z-300">
-        <DropDownHeader menuRef={menuRef as RefObject<HTMLDivElement>} vis={dropDown}/>
+        <DropDownHeader login={login} menuRef={menuRef as RefObject<HTMLDivElement>} vis={dropDown}/>
         <LogoutPopup ref={()=> setLogoutPopout(e=> !e)} vis={logoutPopup}/>
       </section>
       

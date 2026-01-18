@@ -69,7 +69,7 @@ export default function Search() {
       {results.length > 0 && (
         <div
           ref={resultsRef}                        // ← вот важная ссылка
-          className="absolute w-[50vw] mt-1 bg-neutral-900 border border-neutral-700 rounded shadow-xl max-h-96 overflow-auto z-50"
+          className="fixed left-0 w-screen mt-1 bg-neutral-900 border border-neutral-700 rounded shadow-xl max-h-96 overflow-auto z-50"
         >
           <ul>
             {results.map((item) => (

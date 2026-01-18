@@ -8,11 +8,11 @@ const ItemPage = ({ item }: { item: BaseItem }) => {
    
     return (
         <main className="text-white mt-[5vh]">
-            <form action={createApiBasket} className="flex w-[90vw] justify-between">
+            <form action={createApiBasket} className="block md:flex w-[90vw] justify-between">
                 <section className="w-[35%]">
                     
                 </section>
-                <section className="w-[40vw]">
+                <section className=" md:w-[40vw]">
                     <input type="hidden" name="productId" value={id} />
                     <h1 className="text-[24px]">{title}</h1>
                     <h3 className="mb-2">категория: {" " + categorySlug}</h3>
@@ -33,7 +33,9 @@ const ItemPage = ({ item }: { item: BaseItem }) => {
                             Object.entries(item.smartphoneSpec)
                             .map(([key, value]) => (
                             <div className="flex justify-between border-b-1 mb-2 border-neutral-500 " key={key}>
-                                {key}:{value}
+                                <div className="">{key}:</div>
+                                <div className="">{value}</div>
+                                
                             </div>))
                         }</div>
 
@@ -41,7 +43,9 @@ const ItemPage = ({ item }: { item: BaseItem }) => {
                             Object.entries(item.tvSpec)
                             .map(([key, value]) => (
                             <div className="flex justify-between border-b-1 mb-2 border-neutral-500 " key={key}>
-                                {key}:{value}
+                                <div className="">{key}:</div>
+                                <div className="">{value}</div>
+                                
                             </div>))
                         }</div>
                         </section>
