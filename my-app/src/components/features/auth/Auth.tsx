@@ -5,20 +5,22 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 
-type FormState = {
+export type FormState = {
     errors?: {
-        login?: string
-        password?: string
+        general: string[]
     }
     message?: string
     success?: boolean
+    login?: string,
+    password?: string
+    ok?: boolean
 }
 const initialState: FormState = {}
 const Auth = () => {
     const router = useRouter()
     const [ isLogin, setIsLogin] = useState<boolean>(true)
-    const [state, formAction, pending] = useActionState( authAction,initialState)
-    const [stateLogin, formActionLogin, pendingLogin] = useActionState( loginAction,initialState)
+    const [state, formAction, pending] = useActionState<FormState,FormData>( authAction,initialState)
+    const [stateLogin, formActionLogin, pendingLogin] = useActionState<FormState,FormData>( loginAction,initialState)
     useEffect(() => {
         console.log('общий ответ от stateLogin')
         console.log(stateLogin)
@@ -45,10 +47,10 @@ const Auth = () => {
      
         <form className="bg-neutral-800 w-max md:w-[40vw] max-w-[550px] h-max px-7 py-5 rounded-md" action={isLogin ? formActionLogin :formAction}>
             <div className="mb-5 text-center text-[24px]  ">{isLogin ? 'Вход' : 'Регистрация'}</div>
-            {state.errors?.login && <>ошибка</>}
+            {state.errors?.general && <>ошибка</>}
             <div className="mb-2">Логин</div>
             <input className="bg-neutral-900 w-full mb-5 px-3 py-2 " type="text"  name="login"/>
-            {state.errors?.password && <>ошибка</>}
+            {state.errors?.general && <>ошибка</>}
             <div className="mb-2">Пароль</div>
             <input className="bg-neutral-900 w-full mb-5 px-3 py-2 " type="text"  name="password"/>
             <section className="block md:flex justify-between">

@@ -1,7 +1,4 @@
-export interface FilterChoice {
-  value: string;
-  label?: string;
-}
+
 
 export interface BaseFilter {
   id: string;
@@ -11,6 +8,12 @@ export interface BaseFilter {
 
 export type Filter =
   | (BaseFilter & { type: 'range'; min: number; max: number; step?: number; currency?: string })
-  | (BaseFilter & { type: 'checkbox'; choices: string[] | FilterChoice[] });
+  | (BaseFilter & { type: 'checkbox'; choices: string[]  });
 
-export type FiltersByCategory = Record<string, Filter[]>;
+type FinalFilter = {
+  value: string,
+  defaultFilter: Filter[]
+  filters: Filter[]
+}
+
+export type FiltersByCategory = Record<string, FinalFilter>;

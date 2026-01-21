@@ -24,10 +24,8 @@ export const createApiUpdateBasket = async (formData:FormData ) => {
                 basketId: true
             }
         })
-        if (!basketItem) {
-            return {seccess: false, error: 'товар не найден в вашей корзине'}
-        }
-        const newQuantity = action === "+"
+        if (basketItem) {
+            const newQuantity = action === "+"
         ? basketItem.quantity + 1
         : Math.max(0,basketItem.quantity-1)
 
@@ -42,6 +40,8 @@ export const createApiUpdateBasket = async (formData:FormData ) => {
             })
         }
         revalidatePath("/basket")
+        }
+        
     } catch (error) {
         console.log(error)
        
