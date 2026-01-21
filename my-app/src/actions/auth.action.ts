@@ -1,10 +1,9 @@
 "use server"
 
+import { FormState } from "@/components/features/auth/Auth"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
-import { signIn } from "next-auth/react"
-import { redirect } from "next/dist/server/api-utils"
-import { success, z } from "zod"
+import { z } from "zod"
 
 const registerSchema = z.object({
   login: z.string()
@@ -17,15 +16,7 @@ const registerSchema = z.object({
     .max(100, 'пароль длинный')
 })
 
-type FormState = {
-  ok?: boolean
-  errors?: {
-    login?: string[]
-    password?: string[]
-    general?: string
-  }
-  message?: string
-}
+
 
 export const authAction = async (
   prevState: FormState,
@@ -40,7 +31,7 @@ export const authAction = async (
   const result = registerSchema.safeParse(data)
   if (!result.success) {
     return {
-      errors: result.error.flatten().fieldErrors,
+      errors: {general: [result.error.flatten().fieldErrors as string]} ,
       message: 'Проверьте правильность заполнения'
     }
   }
@@ -52,8 +43,7 @@ export const authAction = async (
     })
     if (existing) {
       return {
-        errors: { login: ["логин занят"] },
-        message: "Этот логин уже используется"
+        errors: { general: ["логин занят"] },
       }
     }
 
@@ -88,8 +78,7 @@ export const authAction = async (
   } catch (error) {
     console.error("Ошибка регистрации:", error)
     return {
-      errors: { general: ["Что-то пошло не так, попробуйте позже"] },
-      message: "Ошибка сервера"
+      errors: { general: ["Что-то пошло не так, попробуйте позже"]},
     }
   }
 }
@@ -97,14 +86,13 @@ export const authAction = async (
 export async function loginAction(
   prevState: FormState,
   formData: FormData
-){
+): Promise<FormState>{
   const data = Object.fromEntries(formData)
     
   const parsed = registerSchema.safeParse(data)
   if (!parsed.success) {
     return {
-      errors: parsed.error.flatten().fieldErrors,
-      message: "Проверьте введённые данные"
+      errors:  { general: ["Проверьте введённые данные"] },
     }
   }
 
@@ -114,20 +102,18 @@ export async function loginAction(
   })
 
   if (!user || !user.password) {
-    console.log("Пользователь не найден")
     return { errors: { general: ["Пользователь не найден"] } }
   }
 
   const passwordValid = await bcrypt.compare(parsed.data.password, user.password)
   if (!passwordValid) {
-    console.log("Неверный пароль")
     return { errors: { general: ["Неверный пароль"] } }
   }
 
   // Если всё ок — говорим клиенту, что можно выполнять вход
   return {
-    login: data.login,
-    password: data.password,
+    login: data.login as string,
+    password: data.password as string,
     success: true,
     message: "Данные верны, сейчас выполним вход..."
   }

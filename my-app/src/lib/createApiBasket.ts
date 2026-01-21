@@ -15,7 +15,7 @@ type PageItemApiResult = {
 export const createApiBasket = async (formData: FormData, quantity:number = 1) => {
     const session = await auth()
     
-    const productId = formData.get('productId')
+    const productId: string = formData.get('productId')?.toString() ?? ''
     if(!session?.user?.id) {
         return {error: "необходимо войти в аккаунт"}
     }
@@ -59,7 +59,8 @@ export const createApiBasket = async (formData: FormData, quantity:number = 1) =
                     }
                 })
             }else {
-                await tx.basketItem.create({
+                if(basket){
+                    await tx.basketItem.create({
                     data: {
                         basketId: basket.id,
                         productId,
@@ -67,6 +68,8 @@ export const createApiBasket = async (formData: FormData, quantity:number = 1) =
                         priceAtAdd: product.price
                     }
                 })
+                }
+                
             }
         })
         console.log("успешное добавление")

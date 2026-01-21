@@ -5,12 +5,34 @@ import { useRouter } from 'next/navigation'
 import { createApiSearch } from '@/lib/createApiSearch'
 import MyInput from '@/components/ui/MyInput'
 
+
+type Item = {
+    brand: {
+        id: string;
+        name: string;
+    } | null;
+} & {
+    id: string;
+    title: string;
+    description: string | null;
+    price: number;
+    rating: number | null;
+    available: boolean;
+    categorySlug: string;
+    brandId: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+}
+
 export default function Search() {
   const [value, setValue] = useState('')
-  const [results, setResults] = useState<any[]>([])
+  const [results, setResults] = useState<Item[]>([])
   const formRef = useRef<HTMLFormElement>(null)
   const resultsRef = useRef<HTMLDivElement>(null) // ← ссылка на контейнер результатов
   const router = useRouter()
+
+
+
 
   // Debounce + поиск
   useEffect(() => {

@@ -27,7 +27,7 @@ const FilterMenu = () => {
         router.push(`${pathname}?${params.toString()}`)
     }
 
-    const toggleCheckboxParam = (val,key: string, value: string) => {
+    const toggleCheckboxParam = (val: string,key: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString())
         const current = params.getAll(key)
         const currantValue = val+ '.' + value
@@ -88,7 +88,7 @@ const FilterMenu = () => {
                         )}
                         {ell.type === 'checkbox' && (
                             <ul>
-                                {ell.choices.map(choice => {
+                                {ell.choices.map((choice) => {
                                     const isChecked = searchParams.getAll(ell.id).includes('defaultFilter' + '.' +choice)
                                  
                                     return (

@@ -9,7 +9,7 @@ type CardProductType = {
     categorySlug: string
 }
 
-const CardProduct:React.FC<CardProductType> = ({id,name,brand,price,year,categorySlug}) => {
+const CardProduct:React.FC<CardProductType> = ({id,name,price,categorySlug}) => {
 
     return ( 
     <Link href={{
