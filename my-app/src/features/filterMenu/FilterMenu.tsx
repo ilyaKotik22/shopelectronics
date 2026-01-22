@@ -1,7 +1,7 @@
 'use client'
 import { Checkbox } from "@/components/ui/checkbox"
 import MyInput from "@/components/ui/MyInput";
-import { filtersByCategory } from "@/config/filterMenu";
+import { FILTERS_BY_CATEGORY } from "@/config/filterMenu";
 import { useParams, usePathname, useRouter, useSearchParams} from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -50,7 +50,7 @@ const FilterMenu = () => {
     return ( 
     <section className="">
         <ul className="text-white"> 
-            {filtersByCategory[params.catalog]?.defaultFilter.map(ell => (
+            {FILTERS_BY_CATEGORY[params.catalog]?.defaultFilter.map(ell => (
                 <li className="pb-5" key={ell.id}>
                     <span className="pb-2">{ell.name}</span>
 
@@ -111,7 +111,7 @@ const FilterMenu = () => {
                     </div>
                 </li>
             ))}
-            {filtersByCategory[params.catalog]?.filters.map(ell => (
+            {FILTERS_BY_CATEGORY[params.catalog]?.filters.map(ell => (
                 <li className="pb-5" key={ell.id}>
                     <span className="pb-2">{ell.name}</span>
 
@@ -120,7 +120,7 @@ const FilterMenu = () => {
                         {ell.type === 'checkbox' && (
                             <ul>
                                 {ell.choices.map(choice => {
-                                    const isChecked = searchParams.getAll(ell.id).includes(filtersByCategory[params.catalog].value + '.' +choice)
+                                    const isChecked = searchParams.getAll(ell.id).includes(FILTERS_BY_CATEGORY[params.catalog].value + '.' +choice)
                                     
                                     return (
                                         <li key={choice}>
@@ -129,7 +129,7 @@ const FilterMenu = () => {
                                                 className="mr-2"
                                                 checked={isChecked}
                                                 onCheckedChange={(checked) => {
-                                                    toggleCheckboxParam(filtersByCategory[params.catalog].value,ell.id, choice)
+                                                    toggleCheckboxParam(FILTERS_BY_CATEGORY[params.catalog].value,ell.id, choice)
                                                 }}
                                             />
                                             {choice}

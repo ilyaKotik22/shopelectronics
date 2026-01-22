@@ -1,8 +1,8 @@
 "use server"
 
-import { prisma } from "./prisma"
+import { prisma } from "../lib/prisma"
 
-export const createApiGetBasket = async (userId:string) => {
+export const basketGetAction = async (userId:string) => {
     const carts = await prisma.basket.findUnique({
     where: { userId },
     include: {

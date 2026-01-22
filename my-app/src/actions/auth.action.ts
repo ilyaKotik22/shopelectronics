@@ -1,6 +1,6 @@
 "use server"
 
-import { FormState } from "@/components/features/auth/Auth"
+import { FormState } from "@/features/auth/Auth"
 import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 import { z } from "zod"

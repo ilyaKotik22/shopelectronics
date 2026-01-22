@@ -1,18 +1,8 @@
 "use server"
 import { auth } from '@/auth';
-import { Prisma } from '@prisma/client'; // или "@/generated/prisma/browser"
+import { prisma } from '../lib/prisma';
 
-import { prisma } from './prisma';
-
-
-type PageItemApiResult = {
-  where: Prisma.ProductWhereInput;
-  include: Prisma.ProductInclude;
-  orderBy: Prisma.ProductOrderByWithRelationInput;
-  take: number;
-};
-
-export const createApiBasket = async (formData: FormData, quantity:number = 1) => {
+export const basketAddAction = async (formData: FormData, quantity:number = 1) => {
     const session = await auth()
     
     const productId: string = formData.get('productId')?.toString() ?? ''

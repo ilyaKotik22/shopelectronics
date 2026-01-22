@@ -1,10 +1,10 @@
 "use server"
 
 import { auth } from "@/auth"
-import { prisma } from "./prisma"
+import { prisma } from "../lib/prisma"
 import { revalidatePath } from "next/cache"
 
-export const createApiUpdateBasket = async (formData:FormData ) => {
+export const basketUpdateAction = async (formData:FormData ) => {
     try {
         const session = await auth()
         const userId = session?.user?.id

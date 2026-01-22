@@ -1,7 +1,7 @@
-import FilterMenu from "@/components/features/filterMenu/FilterMenu";
+import FilterMenu from "@/features/filterMenu/FilterMenu";
 import { prisma } from '@/lib/prisma'
 import MenuBlock from "@/components/ui/menuBlock";
-import { createApi } from "@/lib/createApi";
+import { filterAction } from "@/actions/filter.action";
 import { BaseItem } from "@/types/item";
 
 const Page = async ({params, searchParams}: {
@@ -13,7 +13,7 @@ const Page = async ({params, searchParams}: {
     const paramsUrl =  await params
 
       
-    const products: BaseItem[] = await prisma.product.findMany(createApi(paramsUrl,SearchParams)) as unknown as BaseItem[] || []
+    const products: BaseItem[] = await prisma.product.findMany(filterAction(paramsUrl,SearchParams)) as unknown as BaseItem[] || []
 
     return ( 
     <section className="grid grid-cols-1 lg:grid-cols-[2fr_10fr] gap-6 lg:gap-10  w-[90vw]">

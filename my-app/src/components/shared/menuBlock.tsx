@@ -1,5 +1,5 @@
 import { BaseItem } from "@/types/item";
-import CardProduct from "./cardProduct";
+import CardProduct from "../shared/cardProduct";
 type MenuBlockProps = {
   items: BaseItem[];
 };

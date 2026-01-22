@@ -1,5 +1,5 @@
 import { MyButton } from "@/components/ui/MyButton";
-import { createApiUpdateBasket } from "@/lib/createApiUpdateBasket";
+import { basketUpdateAction } from "@/actions/basketUpdate.action";
 
 type CartBasket = {
     title: string,
@@ -19,12 +19,12 @@ const CartBasket = ({title,quantity,price,id}: CartBasket) => {
         <div className="hidden md:block">{price} рублей</div>
        </section>
         <section className="w-[15%] flex justify-between max-w-[100px]">
-            <form className="mr-2" action={createApiUpdateBasket}>
+            <form className="mr-2" action={basketUpdateAction}>
                 <input  type="hidden" name="ItemId" value={id} />
                 <input type="hidden" name="action" value={"+"}/>
                 <MyButton>+</MyButton>
             </form>
-            <form action={createApiUpdateBasket}>
+            <form action={basketUpdateAction}>
                 <input type="hidden" name="ItemId" value={id} />
                 <input type="hidden" name="action" value={"-"}/>
                 <MyButton>-</MyButton>

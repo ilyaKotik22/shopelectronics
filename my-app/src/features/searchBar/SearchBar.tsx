@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { createApiSearch } from '@/lib/createApiSearch'
+import { searchAction } from '@/actions/search.action'
 import MyInput from '@/components/ui/MyInput'
 
 
@@ -53,7 +53,7 @@ export default function Search() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget as HTMLFormElement)
-    const data = await createApiSearch(formData)
+    const data = await searchAction(formData)
     setResults(data ?? [])
   }
 
@@ -90,7 +90,7 @@ export default function Search() {
 
       {results.length > 0 && (
         <div
-          ref={resultsRef}                        // ← вот важная ссылка
+          ref={resultsRef}                     
           className="fixed left-0 w-screen mt-1 bg-neutral-900 border border-neutral-700 rounded shadow-xl max-h-96 overflow-auto z-50"
         >
           <ul>
@@ -99,7 +99,7 @@ export default function Search() {
                 key={item.id}
                 onClick={() => {
                   router.push(`/item?id=${item.id}&categorySlug=${item.categorySlug}`)
-                  setResults([]) // ← желательно очищать после выбора
+                  setResults([]) 
                 }}
                 className="px-4 py-3 hover:bg-neutral-800 cursor-pointer text-white"
               >

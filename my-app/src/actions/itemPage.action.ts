@@ -7,7 +7,7 @@ type PageItemApiResult = {
   take: number;
 };
 
-export const createPageItemApi = (params: { id: string; categorySlug: string }): PageItemApiResult => {
+export const itemPageAction = (params: { id: string; categorySlug: string }): PageItemApiResult => {
   const result: PageItemApiResult = {
     where: {
       id: params.id,

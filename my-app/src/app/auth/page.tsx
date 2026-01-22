@@ -1,5 +1,5 @@
 
-import Auth from "@/components/features/auth/Auth";
+import Auth from "@/features/auth/Auth";
 
 const Page = async () => {
     
