@@ -1,6 +1,6 @@
 import FilterMenu from "@/features/filterMenu/FilterMenu";
 import { prisma } from '@/lib/prisma'
-import MenuBlock from "@/components/ui/menuBlock";
+import MenuBlock from "@/components/shared/menuBlock";
 import { filterAction } from "@/actions/filter.action";
 import { BaseItem } from "@/types/item";
 

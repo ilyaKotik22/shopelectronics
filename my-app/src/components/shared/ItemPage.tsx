@@ -1,5 +1,5 @@
 import { BaseItem } from "@/types/item";
-import { MyButton } from "./MyButton";
+import { MyButton } from "@/components/ui/MyButton";
 import { basketAddAction } from "@/actions/basketAdd.action";
 
 

@@ -1,4 +1,4 @@
-import ItemPage from "@/components/ui/ItemPage";
+import ItemPage from "@/components/shared/ItemPage";
 import { itemPageAction } from "@/actions/itemPage.action";
 import { prisma } from "@/lib/prisma";
 import { BaseItem } from "@/types/item";
