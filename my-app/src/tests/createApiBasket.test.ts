@@ -1,6 +1,6 @@
 // src/tests/createApiBasket.test.ts
 import { describe, it, expect, beforeEach, jest } from '@jest/globals';
-import { createApiBasket } from '@/lib/createApiBasket';
+import { createApiBasket } from '@/actions/basketAdd.action';
 import * as auth from '@/auth';
 import { prisma } from '@/lib/prisma';
 

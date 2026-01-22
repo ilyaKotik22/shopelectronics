@@ -1,4 +1,4 @@
-import BasketMenu from "@/components/features/basket/BasketMenu";
+import BasketMenu from "@/features/basket/BasketMenu";
 
 
 const Page = () => {

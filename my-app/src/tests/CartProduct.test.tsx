@@ -1,4 +1,4 @@
-import CardProduct from "@/components/ui/cardProduct"
+import CardProduct from "@/components/shared/cardProduct"
 import { render,screen } from '@testing-library/react';
 
 describe("CartProduct", () => {

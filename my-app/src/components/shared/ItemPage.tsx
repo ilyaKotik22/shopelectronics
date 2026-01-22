@@ -1,6 +1,6 @@
 import { BaseItem } from "@/types/item";
-import { MyButton } from "./MyButton";
-import { createApiBasket } from "@/lib/createApiBasket";
+import { MyButton } from "@/components/ui/MyButton";
+import { basketAddAction } from "@/actions/basketAdd.action";
 
 
 const ItemPage = ({ item }: { item: BaseItem }) => {
@@ -8,7 +8,7 @@ const ItemPage = ({ item }: { item: BaseItem }) => {
    
     return (
         <main className="text-white mt-[5vh]">
-            <form action={createApiBasket} className="block md:flex w-[90vw] justify-between">
+            <form action={basketAddAction} className="block md:flex w-[90vw] justify-between">
                 <section className="w-[35%]">
                     
                 </section>

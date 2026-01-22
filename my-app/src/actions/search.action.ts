@@ -10,7 +10,7 @@ const createSlice = (str:string) => {
     }
     return result
 }
-export async function createApiSearch(formData: FormData) {
+export async function searchAction(formData: FormData) {
   const q = formData.get('q')?.toString()?.trim() ?? ''
 
   if (!q || q.length < 2) return []

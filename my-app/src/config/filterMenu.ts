@@ -1,8 +1,8 @@
 // filtersByCategory.js
 
-import { Filter, FiltersByCategory } from "@/types/filter";
+import {FiltersByCategory } from "@/types/filter";
 
-export const filtersByCategory:FiltersByCategory = {
+export const FILTERS_BY_CATEGORY:FiltersByCategory = {
   "smartphones": {
     value: "smartphoneSpec",  // ← латиница для URL/query
     defaultFilter: [

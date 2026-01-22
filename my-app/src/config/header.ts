@@ -1,4 +1,4 @@
-export const headerConfig = {
+export const HEADER = {
     dropDownMenu: [
   {
     name: "Смартфоны",

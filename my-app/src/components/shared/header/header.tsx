@@ -2,8 +2,8 @@
 import { RefObject, useEffect, useRef, useState } from "react";
 import DropDownHeader from "./dropDownHeader";
 import { useRouter } from "next/navigation";
-import SearchBar from "../features/searchBar/SearchBar";
-import LogoutPopup from "../features/auth/logout";
+import SearchBar from "@/features/searchBar/SearchBar"
+import LogoutPopup from "@/features/auth/logout";
 
 type Header = {
   login:string

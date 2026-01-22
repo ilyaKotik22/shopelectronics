@@ -1,12 +1,12 @@
 
 import { auth } from "@/auth";
-import { createApiGetBasket } from "@/lib/createApiGetBasket";
+import { basketGetAction } from "@/actions/basketGet.action";
 import CartBasket from "./CartBasket";
 
 const BasketMenu = async () => {
     const session = await auth()
     console.log(session)
-    const menuItems = await createApiGetBasket(session?.user?.id as string)
+    const menuItems = await basketGetAction(session?.user?.id as string)
     console.log(menuItems)
     const sum = menuItems?.items.reduce((acc,item)=>{
         return acc + item.quantity * item.product.price

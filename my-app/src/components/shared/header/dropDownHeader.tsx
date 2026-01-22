@@ -1,4 +1,4 @@
-import { headerConfig } from "@/config/header"
+import { HEADER } from "@/config/header"
 import { useRouter } from "next/navigation"
 import { RefObject } from "react"
 
@@ -11,7 +11,7 @@ type DropDownItem = { name: string; url: string; params: string; }
 
 const DropDownHeader: React.FC<DropDownHeaderType> = ({vis,menuRef,login}) => {
     const router = useRouter()
-    const categoris: DropDownItem[] = headerConfig.dropDownMenu
+    const categoris: DropDownItem[] = HEADER.dropDownMenu
     const viss = vis ? 'block' : 'hidden'
     return ( 
     <section ref={menuRef} className={'flex fixed top-0 text-white z-300 '  + viss}>

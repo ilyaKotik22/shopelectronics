@@ -15,7 +15,7 @@ const whereBuilder = (param: string | string[]) => {
          return [finnalValue[1]]
         }}
 
-export const createApi = (params: { catalog: string }, query: QueryParams) => {
+export const filterAction = (params: { catalog: string }, query: QueryParams) => {
   const categorySlug = params.catalog || ""
 
   const where: Prisma.ProductWhereInput = {

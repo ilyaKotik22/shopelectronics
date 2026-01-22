@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect,beforeEach } from '@jest/globals';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import LogoutPopup from '@/components/features/auth/logout';
+import LogoutPopup from '@/features/auth/logout';
 
 
 // Мокаем next-auth и next/navigation

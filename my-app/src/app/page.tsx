@@ -1,5 +1,5 @@
-import Block0Home from "@/components/ui/home/block0home";
-import Block1Home from "@/components/ui/home/block1";
+import Block0Home from "@/components/shared/home/block0home";
+import Block1Home from "@/components/shared/home/block1";
 
 
 export default function Home() {
