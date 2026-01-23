@@ -43,16 +43,16 @@ const Auth = () => {
     }
   }, [stateLogin])
     return (  
-        <section className="flex text-white justify-center  items-center w-max md:w-[94vw] h-[70vh]  ">
+        <section className="flex dark:text-black text-white justify-center  items-center w-max md:w-[94vw] h-[70vh]  ">
      
-        <form className="bg-neutral-800 w-max md:w-[40vw] max-w-[550px] h-max px-7 py-5 rounded-md" action={isLogin ? formActionLogin :formAction}>
+        <form className="bg-neutral-800 dark:bg-neutral-200 w-max md:w-[40vw] max-w-[550px] h-max px-7 py-5 rounded-md" action={isLogin ? formActionLogin :formAction}>
             <div className="mb-5 text-center text-[24px]  ">{isLogin ? 'Вход' : 'Регистрация'}</div>
             {state.errors?.general && <>ошибка</>}
             <div className="mb-2">Логин</div>
-            <input className="bg-neutral-900 w-full mb-5 px-3 py-2 " type="text"  name="login"/>
+            <input className="bg-neutral-900 dark:bg-neutral-400 w-full mb-5 px-3 py-2 " type="text"  name="login"/>
             {state.errors?.general && <>ошибка</>}
             <div className="mb-2">Пароль</div>
-            <input className="bg-neutral-900 w-full mb-5 px-3 py-2 " type="text"  name="password"/>
+            <input className="bg-neutral-900 dark:bg-neutral-400 w-full mb-5 px-3 py-2 " type="text"  name="password"/>
             <section className="block md:flex justify-between">
               {isLogin ? 
               <>

@@ -6,10 +6,8 @@ export const basketAddAction = async (formData: FormData, quantity:number = 1) =
     const session = await auth()
     
     const productId: string = formData.get('productId')?.toString() ?? ''
-    if(!session?.user?.id) {
-        return {error: "необходимо войти в аккаунт"}
-    }
-    const userId = session.user.id
+  
+    const userId = session?.user?.id
     try {
         const product = await prisma.product.findUnique({
             where: {id: productId},
@@ -21,12 +19,7 @@ export const basketAddAction = async (formData: FormData, quantity:number = 1) =
                 title: true
             }
         })
-        if (!product) {
-            return {error: "Товар не найден"}
-        } 
-        if (!product.available){
-            return {error: "товар не доступен"}
-        }
+       
         if (quantity < 1) {
             quantity = 1
         }
@@ -36,7 +29,8 @@ export const basketAddAction = async (formData: FormData, quantity:number = 1) =
                 productId
             }
         })
-        await prisma.$transaction(async (tx) => {
+        if (product){
+            await prisma.$transaction(async (tx) => {
             const basket = await tx.basket.findUnique({
                 where: {userId}
             })
@@ -63,13 +57,12 @@ export const basketAddAction = async (formData: FormData, quantity:number = 1) =
             }
         })
         console.log("успешное добавление")
-        return {
-            success: true,
-            message: `Добавленно ${quantity} шт ${product.title} в корзину`
         }
+        
+        
     }catch (error) {
         console.log(error)
-        return error
+        
     }
 
 };
