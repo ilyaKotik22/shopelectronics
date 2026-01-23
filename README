@@ -1,6 +1,3 @@
- 
-
-```markdown
 # MyApp
 
 **MyApp** — современное веб-приложение на **Next.js 14+** с **TypeScript**, **Prisma** и системой аутентификации.  
@@ -14,4 +11,19 @@
 my-app/
 ├── prisma/            # Схема базы данных и миграции
 ├── public/            # Статические файлы (изображения, иконки)
-...
+├── src/
+│   ├── actions/       # Логика взаимодействия с API
+│   ├── app/           # Страницы приложения (Next.js App Router)
+│   ├── components/    # UI и общие компоненты
+│   │   └── ui/        # Кастомные элементы управления (кнопки, инпуты, переключатели, ThemeToggle)
+│   ├── features/      # Фичи приложения (Auth, Basket, FilterMenu, SearchBar)
+│   ├── config/        # Настройки приложения (фильтры, header)
+│   ├── lib/           # Утилиты и Prisma клиент
+│   ├── types/         # TypeScript типы (user, cardProduct, state и др.)
+│   ├── generated/     # Сгенерированные Prisma файлы
+│   ├── tests/         # Юнит и интеграционные тесты
+│   └── auth.ts        # Глобальные функции аутентификации
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md
