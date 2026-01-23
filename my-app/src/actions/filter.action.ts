@@ -52,7 +52,7 @@ export const filterAction = (params: { catalog: string }, query: QueryParams) =>
     }
     // 2. Обработка спецификаций (laptopSpec, smartphoneSpec и т.д.)
     else if (prefix.endsWith('Spec')) {
-      const specName = prefix // laptopSpec, smartphoneSpec и т.д.
+      const specName: keyof Prisma.ProductWhereInput = prefix // laptopSpec, smartphoneSpec и т.д.
 
       // Добавляем include, если его ещё нет
       if (!include[specName as keyof Prisma.ProductInclude]) {

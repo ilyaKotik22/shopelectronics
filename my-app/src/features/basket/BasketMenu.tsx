@@ -13,7 +13,7 @@ const BasketMenu = async () => {
   
     },0)
     return ( 
-        <section className="flex flex-wrap md:grid grid-cols-12 gap-5 text-white">
+        <section className="flex flex-wrap md:grid grid-cols-12 gap-5 text-white dark:text-black">
       
             <ul className="block col-span-8">
                 {menuItems?.items.map((cart)=> (
@@ -25,7 +25,7 @@ const BasketMenu = async () => {
                         price={cart.product.price}/>
                 ))}
             </ul>
-            <section className="col-span-4 bg-neutral-800 px-7 py-5 rounded-md">
+            <section className="col-span-4 dark:bg-neutral-200 bg-neutral-800 px-7 py-5 rounded-md">
                 <h1 className="text-[24px] mb-4">Общая стоимость:</h1>
                 <ul className="mb-4">
                     {menuItems?.items.map((el)=>(

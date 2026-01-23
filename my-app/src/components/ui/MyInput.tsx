@@ -13,7 +13,7 @@ const MyInput: React.FC<InputProps> = ({label,error,value,onChange, className, .
     }
     return (  
     <input
-        className={"px-3 py-3 border-2 border-white rounded-md "  + className}
+        className={"px-3 py-3 border-2 border-white dark:border-black rounded-md "  + className}
         value={value}
         onChange={handleChange}
         {...props}

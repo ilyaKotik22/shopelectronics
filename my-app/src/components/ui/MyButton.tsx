@@ -14,7 +14,7 @@ export const MyButton = <T extends React.ElementType = "button">({
 
   return (
     <Component
-      className="bg-white cursor-pointer text-neutral-800 px-5 py-2 rounded-md hover:bg-neutral-400 transition-all duration-150"
+      className="bg-white cursor-pointer dark:bg-black dark:text-white text-neutral-800 px-5 py-2 rounded-md hover:bg-neutral-400 transition-all duration-150"
       {...props}
     >
       {children}

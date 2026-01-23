@@ -49,7 +49,7 @@ const FilterMenu = () => {
   
     return ( 
     <section className="">
-        <ul className="text-white"> 
+        <ul className="text-white dark:text-black"> 
             {FILTERS_BY_CATEGORY[params.catalog]?.defaultFilter.map(ell => (
                 <li className="pb-5" key={ell.id}>
                     <span className="pb-2">{ell.name}</span>

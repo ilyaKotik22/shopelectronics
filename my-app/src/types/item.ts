@@ -1,38 +1,39 @@
+export type TvSpec = {
+  productId: string
+  screenInch?: number | null
+  resolution: string
+  panelType: string
+  refreshHz?: number | null
+  smartTv: boolean
+}
 
 export type LaptopSpec = {
-    productId:string 
-    cpu: string
-    gpu: string
-    ramGb: number
-    storegGb: number
+  productId: string
+  cpu: string
+  ramGb: number
+  storageGb: number
+  gpu?: string | null
 }
+
 export type SmartphoneSpec = {
-    productId: string
-    screenInch: number
-    batteryMah: number
-    cameraMp: number
-    refreshHz: number
-    waterproof: string
+  productId: string
+  screenInch?: number | null
+  batteryMah?: number | null
+  cameraMp?: number | null
+  refreshHz?: number | null
+  waterproof?: string | null
 }
-export type TvSpec = {
-    productId: string
-    screenInch: number
-    resolution: string
-    panelType: string
-    refreshType: number
-    smartTv: boolean
-}
-export type BaseItem = {
-    id: string
-    title: string
-    description: string
-    brand: {id: string, name: string}
-    brandId?: string
-    categorySlug: string
-    price: number
-    rating: string
-    laptopSpec?: LaptopSpec
-    smartphoneSpec?: SmartphoneSpec
-    tvSpec?:TvSpec
+export interface BaseItem {
+  id?: string;
+  title?: string | null;
+  description?: string | null;   
+  brand?: { id: string; name: string } | null;
+  brandId?: string | null;
+  categorySlug: string | null;
+  price?: number | null;
+  rating?: number | null;
+  laptopSpec?: LaptopSpec | null;
+  smartphoneSpec?: SmartphoneSpec | null;
+  tvSpec?: TvSpec | null;
 }
  
