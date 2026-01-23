@@ -27,3 +27,63 @@ my-app/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+
+
+⚡ Технологии
+
+Next.js — React-фреймворк с серверным рендерингом и маршрутизацией
+
+TypeScript — статическая типизация
+
+Prisma — ORM для работы с базой данных
+
+PostgreSQL / MySQL — поддержка различных СУБД
+
+NextAuth.js — аутентификация и авторизация
+
+Vitest & Jest — тестирование компонентов и логики
+
+ESLint + Prettier — контроль качества кода
+
+Tailwind CSS / PostCSS — стилизация и кастомизация UI
+
+ThemeProvider + ThemeToggle — поддержка светлой и тёмной темы
+
+🚀 Установка и запуск
+
+git clone https://github.com/username/my-app.git
+cd my-app
+npm install
+
+Настраиваем переменные окружения .env
+
+DATABASE_URL="..."
+NEXTAUTH_SECRET="..."
+
+Применяем миграции Prisma:
+
+npx prisma migrate dev
+
+
+🛠 Компоненты и фичи
+🔹 Shared Components
+
+Header, Footer, CardProduct, ItemPage, MenuBlock
+
+🔹 UI Components
+
+MyButton, MyInput, Checkbox, ThemeProvider, ThemeToggle
+
+🔹 Features
+
+Auth, Basket, FilterMenu, SearchBar
+
+🔹 Actions
+
+auth, basketAdd/Get/Update, search, filter, itemPage
+
+🧪 Тестирование
+
+npm run test
+
+
