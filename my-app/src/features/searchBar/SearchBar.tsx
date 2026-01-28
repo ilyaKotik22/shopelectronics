@@ -83,7 +83,7 @@ export default function Search() {
           value={value}
           onChange={(e) => setValue(e)} // ← исправлено
           placeholder="Поиск..."
-          className="w-[50vw]"
+          className="w-[40vw]"
         />
         <button type="submit" className="hidden" />
       </form>

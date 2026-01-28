@@ -25,10 +25,10 @@ const Block1Home = () => {
         }
     ]
     return ( 
-    <section className="w-[92vw] z-0">
-        <ul className="flex w-full justify-center gap-5">
+   
+        <ul className="w-[90vw] lg:flex  justify-center gap-5">
             {mas.map((item) => (
-            <li style={{ backgroundImage: `url(${item.img})` }} className={"px-3 min-w-[13.6vw] bg-cover relative bg-center bg-no-repeat h-[300px] py-1 text-white rounded-md " } key={item.title}>
+            <li style={{ backgroundImage: `url(${item.img})` }} className={"mt-2 px-3 lg:w-[14vw] bg-cover relative bg-center bg-no-repeat h-[300px] py-1 text-white rounded-md " } key={item.title}>
                 
                 <div className="absolute bottom-5 z-40">{item.title}</div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent pointer-events-none rounded-md"></div>
@@ -37,7 +37,7 @@ const Block1Home = () => {
         ))}
         </ul>
         
-    </section> );
+ );
 }
  
 export default Block1Home;

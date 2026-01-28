@@ -41,7 +41,7 @@ const Header = ({login}:User) => {
 
     return (
     <>
-        <header className="fixed top-0 left-0 right-0 z-[300] w-[100vw] flex gap-5 sm:justify-center items-center md:justify-center dark:text-black  py-5 text-white bg-neutral-900 dark:bg-neutral-200 sm:px-3 ">
+        <header className="fixed top-0 left-0 right-0 z-[300] w-[100vw] flex gap-5 sm:justify-center justify-center items-center md:justify-center dark:text-black  py-5 text-white bg-neutral-900 dark:bg-neutral-200 sm:px-3 ">
         <section className="cursor-pointer hidden xl:block" onClick={()=> router.push('/')}>
             logo
         </section>
