@@ -32,7 +32,7 @@ const Auth = () => {
         password: stateLogin.password || "",
         redirect: false,
       }).then((result) => {
-        console.log(result)
+
         if (result?.ok) {
           router.push('/')
           router.refresh() 
@@ -43,26 +43,29 @@ const Auth = () => {
     }
   }, [stateLogin])
     return (  
-        <section className="flex dark:text-black text-white justify-center  items-center w-max md:w-[94vw] h-[70vh]  ">
+        <section className="flex dark:text-black text-white justify-center w-[88vw]  items-center md:w-[94vw] h-[70vh]  ">
      
-        <form className="bg-neutral-800 dark:bg-neutral-200 w-max md:w-[40vw] max-w-[550px] h-max px-7 py-5 rounded-md" action={isLogin ? formActionLogin :formAction}>
+        <form className="bg-neutral-800 dark:bg-neutral-200 w-screen md:w-[40vw] max-w-[550px] h-max px-7 py-5 rounded-md" action={isLogin ? formActionLogin :formAction}>
+          
             <div className="mb-5 text-center text-[24px]  ">{isLogin ? 'Вход' : 'Регистрация'}</div>
-            {state.errors?.general && <>ошибка</>}
+            
+            
             <div className="mb-2">Логин</div>
             <input className="bg-neutral-900 dark:bg-neutral-400 w-full mb-5 px-3 py-2 " type="text"  name="login"/>
-            {state.errors?.general && <>ошибка</>}
+            {state.errors && <>ошибка</>}
+            {stateLogin.errors && <>ошибка</>}
             <div className="mb-2">Пароль</div>
             <input className="bg-neutral-900 dark:bg-neutral-400 w-full mb-5 px-3 py-2 " type="text"  name="password"/>
             <section className="block md:flex justify-between">
               {isLogin ? 
               <>
-                <MyButton as="button" >войти</MyButton>
-                <div  onClick={()=> setIsLogin(e=> !e)} className="bg-white cursor-pointer w-max text-neutral-800 px-5 py-2 rounded-md hover:bg-neutral-400 transition-all duration-150" >зарегистрироваться</div>
+                <MyButton as="button" className="mt-5" >войти</MyButton>
+                <div  onClick={()=> setIsLogin(e=> !e)} className="bg-white mt-5 cursor-pointer w-max text-neutral-800 px-5 py-2 rounded-md hover:bg-neutral-400 transition-all duration-150" >зарегистрироваться</div>
               </>
               :
               <>
-                <MyButton as="button" type="submit" >зарегистрироваться</MyButton>
-                <div onClick={()=> setIsLogin(e=> !e)} className="bg-white cursor-pointer w-max text-neutral-800 px-5 py-2 rounded-md hover:bg-neutral-400 transition-all duration-150">войти </div>
+                <MyButton as="button" type="submit" className="mt-5" >зарегистрироваться</MyButton>
+                <div onClick={()=> setIsLogin(e=> !e)} className="bg-white cursor-pointer w-max mt-5 text-neutral-800 px-5 py-2 rounded-md hover:bg-neutral-400 transition-all duration-150">войти </div>
               </>}
               
             </section>

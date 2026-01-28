@@ -5,7 +5,7 @@ type MenuBlockProps = {
 };
 const MenuBlock = async ({items}: MenuBlockProps) => {
  
-    return ( <ul className="flex gap-5 flex-wrap">
+    return ( <ul className="flex gap-5 justify-center lg:justify-start flex-wrap">
         {items.map((el:BaseItem)=>{
             return(
                 <li key={el.id}>
